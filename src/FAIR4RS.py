@@ -5,6 +5,8 @@ import json
 import glob
 import time
 
+from .utils import convert_md
+
 
 def main(
     repository,
@@ -220,33 +222,6 @@ def move_issues_to_project(headers, id_column, id_issues):
         data = {"content_type": "Issue", "content_id": id}
         payload = json.dumps(data)
         r = request("POST", url=url_cards, data=payload, headers=headers)
-
-
-def convert_md(file):
-    """Prepare markdown file for issue creation on GitHub
-
-    Parameters
-    ----------
-    file : str
-        Path to markdown file
-
-    Returns
-    -------
-    [type]
-        [description]
-    """
-
-    with open(file, "r") as f:
-        text = f.read()
-
-        # Get title
-        title = text.split("\n", 2)[:1]
-        title = title[0].replace("# ", "")
-
-        # Remove title from content and store
-        contents = text.split("\n", 2)[2]
-
-    return title, contents
 
 
 if __name__ == "__main__":
