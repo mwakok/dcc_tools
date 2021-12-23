@@ -1,6 +1,20 @@
-# Implement a testing framework
+---
+title: Implement a testing framework
+labels: ["feature"]
+---
 
-Tentative plan of action to implement a test framework
+## Software tests checklist
+_Recommended_  
+- [ ] [Defensive programming](https://swcarpentry.github.io/python-novice-inflammation/10-defensive/index.html)
+- [ ] Reorganise the source code into a python package for easy testing
+- [ ]
+- [ ] Integration or build test
+- [ ] User installation test
+- [ ] Unit tests (coverage >70%)
+- [ ] Continuous integration (GitHub Actions)
+- [ ] Code coverage check ([Codecov](https://about.codecov.io/), [Sonarcloud](https://sonarcloud.io/), [Travis](https://www.travis-ci.com/))
+
+## Steps
 
 - [ ] Reorganise the source code into a python package
 - [ ] Write an integration test for a single script

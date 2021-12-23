@@ -7,11 +7,13 @@ logger = logging.getLogger("gh_project")
 
 
 class GitHubAPI:
-    """Create a project board with issues in a GitHub repository
-    """
+    """Create a project board with issues in a GitHub repository"""
 
     def __init__(
-        self, repo_name: str, repo_owner: str, github_token: str,
+        self,
+        repo_name: str,
+        repo_owner: str,
+        github_token: str,
     ):
         """
         Parameters
@@ -35,15 +37,13 @@ class GitHubAPI:
         verify_authentication(self.base_url, self.headers)
 
     def get_issues(self):
-        """Get issues from GitHub repository
-        """
+        """Get issues from GitHub repository"""
         url = f"{self.base_url}/issues"
         r = get_request(url, self.headers)
         self.issues = {issue["title"]: issue["id"] for issue in r}
 
     def get_projects(self):
-        """Get projects from GitHub repository
-        """
+        """Get projects from GitHub repository"""
         url = f"{self.base_url}/projects"
         r = get_request(url, self.headers)
         self.projects = {project["name"]: project["id"] for project in r}
@@ -58,7 +58,7 @@ class GitHubAPI:
         path : str
             Path to local directory with markdown files
         """
-        self.markdown = load_markdown_files(path=path)
+        self.markdown_issues = load_markdown_files(path=path)
 
     def push_project(
         self, project_name: str, columns: list = ["To do", "In progress", "Done"]
@@ -95,7 +95,7 @@ class GitHubAPI:
                 self.id_column = r["id"]
         logger.info(f"Created project {project_name} with columns {columns}")
 
-    def push_issues(self, labels: list = ["documentation"]):
+    def push_issues(self):
         """Upload issues to GitHub repository
 
         Parameters
@@ -105,23 +105,24 @@ class GitHubAPI:
         """
         url = f"{self.base_url}/import/issues"
 
-        self.get_issues()
-
-        for title, body in self.markdown.items():
+        # Load issue title, labels, and content
+        for issue in self.markdown_issues:
             data = {
                 "issue": {
-                    "title": title,
-                    "body": body,
+                    "title": issue["title"],
+                    "body": issue.content,
                     "closed": False,
-                    "labels": labels,
+                    "labels": issue["labels"],
                 }
             }
+
             # Check if issue exists
-            if title not in self.issues.keys():
+            self.get_issues()
+            if issue["title"] not in self.issues.keys():
                 post_request(url, data, self.headers)
-                logger.info(f"Issue '{title}' uploaded")
+                logger.info(f"Issue '{issue['title']}' uploaded")
             else:
-                logger.warning(f"Issue '{title}' already exists")
+                logger.warning(f"Issue '{issue['title']}' already exists")
 
     def add_issues_to_project(self, project_name: str, column_name: str = "To do"):
         """Add uploaded issues to project board
@@ -146,8 +147,9 @@ class GitHubAPI:
 
         # Only move issues if all uploaded issues are present on GitHub
         self.get_issues()
-        if set(self.markdown.keys()).issubset(self.issues.keys()):
-            issue_ids = [self.issues[name] for name in self.markdown.keys()]
+        issue_list = [issue["title"] for issue in self.markdown_issues]
+        if set(issue_list).issubset(self.issues.keys()):
+            issue_ids = [self.issues[name] for name in issue_list]
             for id in issue_ids:
                 data = {"content_type": "Issue", "content_id": id}
                 post_request(url, data, self.headers)
@@ -182,4 +184,3 @@ class GitHubAPI:
         except KeyError:
             logger.error(f"Cannot find project {project_name}")
             return None
-

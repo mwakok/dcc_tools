@@ -10,10 +10,14 @@ def create_parser():
     args
         defined arguments for CLI
     """
-    parser = argparse.ArgumentParser(formatter_class=argparse.MetavarTypeHelpFormatter,)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.MetavarTypeHelpFormatter,
+    )
 
     parser.add_argument(
-        "--repo", type=str, help="name of the GitHub repository", required=True,
+        "--repo",
+        type=str,
+        required=True,
     )
     parser.add_argument("--path", type=str, required=True)
     parser.add_argument("--project", default="DCC Support", type=str)

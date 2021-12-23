@@ -1,6 +1,7 @@
 import os
 import glob
 import logging
+import frontmatter
 
 logger = logging.getLogger("gh_project")
 
@@ -15,20 +16,20 @@ def load_markdown_files(path: str):
     """
 
     files = glob.glob(f"{path}/*.md")
-    markdown = {}
+    issues = []
 
     if not files:
         logger.warning(f"No markdown files found in {path}")
     else:
 
         for file in files:
-            [title, contents] = convert_md(file)
-            markdown[title] = contents
-            logger.info(
-                f"Issue '{title}' imported from file '{os.path.basename(file)}'"
-            )
+            with open(file, "r") as f:
+                issues.append(frontmatter.load(f))
+                logger.info(
+                    f"Issue '{issues[-1]['title']}' imported from file '{os.path.basename(file)}'"
+                )
 
-    return markdown
+    return issues
 
 
 def convert_md(file):
@@ -58,4 +59,3 @@ def convert_md(file):
         contents = text.split("\n", 2)[2]
 
     return title, contents
-

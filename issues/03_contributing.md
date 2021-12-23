@@ -1,3 +1,8 @@
+---
+title: Add CONTRIBUTING file
+labels: ["documentation"]
+---
+
 # Add a CONTRIBUTING file
 
 We should add a CONTRUTING.md file containing instructions for:

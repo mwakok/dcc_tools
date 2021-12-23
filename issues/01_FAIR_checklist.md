@@ -1,11 +1,14 @@
+---
+title: Create FAIR software checklist
+labels: ["documentation"]
+---
+
 # Checklist for FAIR research software
 
-The checklist below is in part based on the checklist provided by the [eScience Center](https://guide.esciencecenter.nl/#/nlesc_specific/checklist_matrix), licensed under CC BY 4.0.
-
-#### Version Control  
+#### Version control with GitHub 
 _Essential_  
-- [ ] Use [git](https://www.atlassian.com/git) as a version control system 
-- [ ] Upload your project on [GitHub](https://github.com/) or [TU Delft GitLab](https://gitlab.tudelft.nl/)
+- [x] Use [git](https://www.atlassian.com/git) as a version control system 
+- [x] Upload your project on [GitHub](https://github.com/) or [TU Delft GitLab](https://gitlab.tudelft.nl/)
 
 _Recommended_  
 - [ ] Make your repository [public](https://coderefinery.github.io/social-coding/social_coding/)
@@ -16,15 +19,15 @@ _Recommended_
 
 #### Documentation - Repository
 _Essential_  
-- [ ] [README](https://github.com/18F/open-source-guide/blob/18f-pages/pages/making-readmes-readable.md)
-- [ ] [LICENSE](https://doi.org/10.5281/zenodo.4629662)
-- [ ] [CITATION](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files)
+- [ ] Add [README](https://github.com/18F/open-source-guide/blob/18f-pages/pages/making-readmes-readable.md)
+- [ ] Add [LICENSE](https://doi.org/10.5281/zenodo.4629662)
+- [ ] Add [CITATION](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files)
 
-
-_Recommended_  
+_Recommended_
+- [ ] Read the [Divio documentation system](https://documentation.divio.com/)
 - [ ] Make use of [Github issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues)
-- [ ] Contribution [guidelines](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors)
-- [ ] [Code of conduct](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project)
+- [ ] Add [Contribution guidelines](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors)
+- [ ] Add [Code of conduct](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project)
 
 #### Documentation - Software
 _Essential_  
@@ -51,7 +54,7 @@ _Recommended_
 
 #### Releases
 _Essential_  
-- [ ] Obtain a DOI ([Zenodo](https://zenodo.org/) or [4TU.ResearchData](https://data.4tu.nl/info/en/))
+- [ ] Obtain a DOI from ([Zenodo](https://zenodo.org/) or [4TU.ResearchData](https://data.4tu.nl/info/en/))
 
 _Recommended_  
 - [ ] [Semantic versioning](https://semver.org/)
