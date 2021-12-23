@@ -1,9 +1,9 @@
-import os
-import glob
-from requests import request
-import json
+import logging
 
-from utils import convert_md
+from md_functions import load_markdown_files
+from api_calls import get_request, post_request, verify_authentication
+
+logger = logging.getLogger("gh_project")
 
 
 class GitHubAPI:
@@ -13,8 +13,7 @@ class GitHubAPI:
     def __init__(
         self, repo_name: str, repo_owner: str, github_token: str,
     ):
-        """[summary]
-
+        """
         Parameters
         ----------
         repo_name : str
@@ -33,20 +32,24 @@ class GitHubAPI:
         self.base_url = (
             f"https://api.github.com/repos/{self.repo_owner}/{self.repo_name}"
         )
-        self.verify_authentication(self.base_url, self.headers)
+        verify_authentication(self.base_url, self.headers)
 
     def get_issues(self):
+        """Get issues from GitHub repository
+        """
         url = f"{self.base_url}/issues"
-        r = self.get_request(url, self.headers)
+        r = get_request(url, self.headers)
         self.issues = {issue["title"]: issue["id"] for issue in r}
 
     def get_projects(self):
+        """Get projects from GitHub repository
+        """
         url = f"{self.base_url}/projects"
-        r = self.get_request(url, self.headers)
+        r = get_request(url, self.headers)
         self.projects = {project["name"]: project["id"] for project in r}
 
-    def import_markdown(self, path):
-        """Path to directory containing markdown files that will be converted into issues.
+    def load_markdown_files(self, path: str):
+        """Import markdown files for uploading as issues.
         The first line of the markdown file will become the issue title (can be preceeded by a #), while
         the remainder of the markdown file will be converted into the issue body.
 
@@ -55,14 +58,11 @@ class GitHubAPI:
         path : str
             Path to local directory with markdown files
         """
-        self.markdown = {}
-        files = glob.glob(f"{path}/*.md")
-        for file in files:
-            [title, contents] = convert_md(file)
-            self.markdown[title] = contents
-            print(f"Issue '{title}' imported from file '{os.path.basename(file)}'")
+        self.markdown = load_markdown_files(path=path)
 
-    def push_project(self, project_name, columns=["To do", "In progress", "Done"]):
+    def push_project(
+        self, project_name: str, columns: list = ["To do", "In progress", "Done"]
+    ):
         """Push project to GitHub repository
 
         Parameters
@@ -79,22 +79,23 @@ class GitHubAPI:
         self.get_projects()
         if bool(self.projects):
             if project_name in self.projects.keys():
-                print(f"Project '{project_name}' already exists")
+                logger.warning(f"Project '{project_name}' already exists")
                 return
-        else:
-            data = {"name": project_name}
-            r = self.post_request(url, data, self.headers)
-            id_project = r["id"]
 
-            # Add columns
-            url = f"https://api.github.com/projects/{id_project}/columns"
-            for column in columns:
-                data = {"name": column}
-                r = self.post_request(url, data, self.headers)
-                if column == columns[0]:
-                    self.id_column = r["id"]
+        data = {"name": project_name}
+        r = post_request(url, data, self.headers)
+        id_project = r["id"]
 
-    def push_issues(self, labels=["documentation"]):
+        # Add columns to project board
+        url = f"https://api.github.com/projects/{id_project}/columns"
+        for column in columns:
+            data = {"name": column}
+            r = post_request(url, data, self.headers)
+            if column == columns[0]:
+                self.id_column = r["id"]
+        logger.info(f"Created project {project_name} with columns {columns}")
+
+    def push_issues(self, labels: list = ["documentation"]):
         """Upload issues to GitHub repository
 
         Parameters
@@ -117,19 +118,30 @@ class GitHubAPI:
             }
             # Check if issue exists
             if title not in self.issues.keys():
-                self.post_request(url, data, self.headers)
-                print(f"Issue '{title}' uploaded")
+                post_request(url, data, self.headers)
+                logger.info(f"Issue '{title}' uploaded")
             else:
-                print(f"Issue '{title}' already exists")
+                logger.warning(f"Issue '{title}' already exists")
 
-    def move_issues_to_project(self, project_name, column_name="To do"):
+    def add_issues_to_project(self, project_name: str, column_name: str = "To do"):
+        """Add uploaded issues to project board
 
+        Parameters
+        ----------
+        project_name : str
+            name of the project board to add the issues to
+        column_name : str, optional
+            name of the column to add the issues to, by default "To do"
+        """
         # Get column ids
         columns = self.get_columns(project_name)
-        assert (
-            column_name in columns.keys()
-        ), "Cannot find column_name in the columns of the project board"
-        id_column = columns[column_name]
+        try:
+            id_column = columns[column_name]
+        except KeyError:
+            logger.error(
+                f"Cannot find {column_name} in the columns of the project board"
+            )
+
         url = f"https://api.github.com/projects/columns/{id_column}/cards"
 
         # Only move issues if all uploaded issues are present on GitHub
@@ -138,13 +150,13 @@ class GitHubAPI:
             issue_ids = [self.issues[name] for name in self.markdown.keys()]
             for id in issue_ids:
                 data = {"content_type": "Issue", "content_id": id}
-                self.post_request(url, data, self.headers)
+                post_request(url, data, self.headers)
         else:
-            print(
+            logger.warning(
                 "Cannot find all issues on GitHub, process could be delayed. Please try again."
             )
 
-    def get_columns(self, project_name):
+    def get_columns(self, project_name: str):
         """Get column names and id's from a project
 
         Parameters
@@ -158,55 +170,16 @@ class GitHubAPI:
             Dictionary with [column_name:column_id] as [key:value]
         """
         self.get_projects()
-        assert bool(self.projects), f"Cannot find project {project_name}"
-
-        if project_name in self.projects.keys():
+        try:
             project_id = self.projects[project_name]
             url = f"https://api.github.com/projects/{project_id}/columns"
-            r = self.get_request(url, self.headers)
+            r = get_request(url, self.headers)
             columns = {column["name"]: column["id"] for column in r}
+            logger.info(
+                f"Successfully retrieved column(s) {columns} from project '{project_name}'"
+            )
             return columns
-        else:
-            print(f"Cannot find project {project_name}")
+        except KeyError:
+            logger.error(f"Cannot find project {project_name}")
             return None
-
-    @staticmethod
-    def post_request(url, data, headers):
-        payload = json.dumps(data)
-        r = request("POST", url=url, data=payload, headers=headers)
-        if r.status_code in [201, 202]:
-            print("Successfully posted the request")
-            return json.loads(r.content)
-        else:
-            print("Could not post the request:", r.status_code)
-            print("Response:", json.loads(r.content))
-
-    @staticmethod
-    def get_request(url, headers):
-        r = request("GET", url=url, headers=headers)
-        if r.status_code == 200:
-            return json.loads(r.content)
-        else:
-            print("Could not get content", r.status_code)
-            print("Response:", json.loads(r.content))
-            return None
-
-    @staticmethod
-    def get_base_url(repo_owner, org_name, repo_name):
-        if repo_owner is None and org_name is not None:
-            return f"https://api.github.com/orgs/{org_name}/repos/{repo_name}"
-        elif org_name is None and repo_owner is not None:
-            return f"https://api.github.com/repos/{repo_owner}/{repo_name}"
-        else:
-            print("Cannot determine repo_owner or org_name")
-            return None
-
-    @staticmethod
-    def verify_authentication(url, headers):
-        r = request("GET", url=url, headers=headers)
-        if r.status_code == 200:
-            print(f"Authentication successful to {url}")
-        else:
-            print(f"Could not connect to {url}: {r.status_code}")
-            print("Response", json.loads(r.content))
 
