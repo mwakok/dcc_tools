@@ -30,32 +30,3 @@ def load_markdown_files(path: str):
                 )
 
     return issues
-
-
-def convert_md(file):
-    """Convert markdown file for issue creation on GitHub.
-    The first line of the markdown file will become the issue title (can be preceeded by a #), while
-    the remainder of the markdown file will be converted into the issue body.
-
-    Parameters
-    ----------
-    file : str
-        Path to markdown file
-
-    Returns
-    -------
-    [type]
-        [description]
-    """
-
-    with open(file, "r") as f:
-        text = f.read()
-
-        # Get title
-        title = text.split("\n", 2)[:1]
-        title = title[0].replace("# ", "")
-
-        # Remove title from content and store
-        contents = text.split("\n", 2)[2]
-
-    return title, contents

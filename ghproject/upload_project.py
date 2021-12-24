@@ -1,9 +1,9 @@
 from arg_parser import create_parser
 
-from logging_functions import _init_logger, set_logger_level
-from GithubAPI import GitHubAPI
+from .logging_functions import _init_logger, set_logger_level
+from .GithubAPI import GitHubAPI
 
-_init_logger()
+# _init_logger()
 
 
 def main(

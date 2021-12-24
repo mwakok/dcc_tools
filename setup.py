@@ -1,21 +1,22 @@
 import os
 from setuptools import setup
+from setuptools import find_packages
 
 here = os.path.abspath(os.path.dirname("__file__"))
 
 version = {}
-with open(os.path.join(here, "src", "__version__.py")) as f:
+with open(os.path.join(here, "ghproject", "__version__.py")) as f:
     exec(f.read(), version)
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
 
 setup(
-    name="GitHub_API",
+    name="ghproject",
     version=version["__version__"],
-    description="",
+    description="Tool to create GitHub project boards with issues",
     long_description=readme,
-    long_description_content_type="text/md",
+    long_description_content_type="text/markdown",
     url="https://github.com/mwakok/github_api",
     author="Maurits Kok",
     author_email="mwakok@gmail.com",
@@ -28,7 +29,12 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     test_suite="tests",
-    install_requires=["requests>=2.24.0"],
+    packages=find_packages(exclude=["*tests*"]),
+    python_requires=">=3.7,<3.9",
+    entry_points={"console_scripts": ["upload_project=ghproject.upload_project:main"]},
+    install_requires=["python-frontmatter", "requests>=2.24.0"],
 )
