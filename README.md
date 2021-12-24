@@ -7,27 +7,14 @@
 We recommend installing the tool inside a conda environment:
 
 ```bash
-git clone https://github.com/mwakok/github_api.git gh_project
-cd gh_project
+git clone https://github.com/mwakok/dcc_tools.git
+cd dcc_tools
 conda env create -f environment.yml
-conda activate gh_project
+conda activate dcc_tools
 pip install -e .
 ```
 
 ### Usage
-
-From tool can be called directly from the termimal
-
-```bash
-python gh_project.create_project
-```
-
- 
-
-
-```python
-import 
-```
 
 
 ## License
