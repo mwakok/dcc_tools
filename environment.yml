@@ -1,4 +1,4 @@
-name: dcc_tools
+name: ghproject
 channels:
   - conda-forge
   - defaults
