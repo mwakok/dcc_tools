@@ -1,6 +1,6 @@
 import os
-from setuptools import setup
-from setuptools import find_packages
+from setuptools import setup, find_packages
+
 
 here = os.path.abspath(os.path.dirname("__file__"))
 
@@ -36,6 +36,7 @@ setup(
     packages=find_packages(exclude=["*tests*"]),
     package_data={"ghproject": ["md_files/*"]},
     python_requires=">=3.7,<3.9",
+    include_package_data=True,
     install_requires=["python-frontmatter", "requests>=2.24.0"],
     extras_require={
         "dev": [
@@ -45,6 +46,7 @@ setup(
             "pre_commit",
             "pytest",
             "pytest-cov",
+            "sphinx",
         ]
     },
 )
