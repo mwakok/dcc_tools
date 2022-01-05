@@ -3,7 +3,7 @@ import glob
 import logging
 import frontmatter
 
-logger = logging.getLogger("gh_project")
+logger = logging.getLogger("ghproject")
 
 
 def load_markdown_files(path: str):

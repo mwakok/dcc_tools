@@ -1,12 +1,12 @@
-from arg_parser import create_parser
+from .arg_parser import create_parser
 
-from .logging_functions import _init_logger, set_logger_level
-from .GithubAPI import GitHubAPI
+from .logging_functions import init_logger, set_logger_level
+from .GitHubAPI import GitHubAPI
 
-# _init_logger()
+init_logger()
 
 
-def main(
+def upload_project(
     repo_name,
     path_issues,
     project_name,
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     args = create_parser()
 
-    main(
+    upload_project(
         repo_name=args.repo,
         path_issues=args.path,
         project_name=args.project,

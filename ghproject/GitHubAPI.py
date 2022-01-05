@@ -3,7 +3,7 @@ import logging
 from .md_functions import load_markdown_files
 from .api_calls import get_request, post_request, verify_authentication
 
-logger = logging.getLogger("gh_project")
+logger = logging.getLogger("ghproject")
 
 
 class GitHubAPI:

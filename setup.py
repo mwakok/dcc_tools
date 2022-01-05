@@ -5,19 +5,19 @@ from setuptools import find_packages
 here = os.path.abspath(os.path.dirname("__file__"))
 
 version = {}
-with open(os.path.join(here, "dcc_tools", "__version__.py")) as f:
+with open(os.path.join(here, "ghproject", "__version__.py")) as f:
     exec(f.read(), version)
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
 
 setup(
-    name="dcc_tools",
+    name="ghproject",
     version=version["__version__"],
-    description="Tool to create GitHub project boards with issues",
+    description="Tool for Digital Competence Center Support",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/mwakok/dcc_tools",
+    url="https://github.com/mwakok/ghproject",
     author="Maurits Kok",
     author_email="mwakok@gmail.com",
     license="Apache Software License 2.0",
@@ -34,6 +34,17 @@ setup(
     ],
     test_suite="tests",
     packages=find_packages(exclude=["*tests*"]),
+    package_data={"ghproject": ["md_files/*"]},
     python_requires=">=3.7,<3.9",
     install_requires=["python-frontmatter", "requests>=2.24.0"],
+    extras_require={
+        "dev": [
+            "black",
+            "bump2version",
+            "isort",
+            "pre_commit",
+            "pytest",
+            "pytest-cov",
+        ]
+    },
 )

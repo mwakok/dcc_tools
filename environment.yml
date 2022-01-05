@@ -7,7 +7,9 @@ dependencies:
   - bump2version
   - notebook
   - pip
+  - pre_commit
   - pytest
+  - pytest-cov
   - python >=3.7,<3.9
   - requests>=2.24.0
   - pip:

@@ -2,7 +2,7 @@ import logging
 from requests import request
 import json
 
-logger = logging.getLogger("gh_project")
+logger = logging.getLogger("ghproject")
 
 
 def post_request(url: str, data: dict, headers: dict):
