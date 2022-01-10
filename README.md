@@ -47,6 +47,10 @@ The various functions can also be accessed directly from the GitHubAPI class. Ex
 
 ```python
 import os
+from ghproject import GitHubAPI, init_logger
+
+# Initialize logger
+init_logger()
 
 # Setup arguments
 repo_name = "my_repository"
@@ -60,7 +64,6 @@ repo.load_markdown_files(path_issues)
 repo.push_project(project_name)
 repo.push_issues()
 repo.add_issues_to_project(project_name)
-
 ```
 
 
