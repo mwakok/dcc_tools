@@ -1,4 +1,6 @@
-# Collection of Digital Competence Center support tools
+# Tool for uploading creating project boards on GitHub
+
+`ghproject` is a tool for uploading project boards to GitHub filled with labelled issues. This has been created to aid project management for consulting in research software projects on GitHub. The package comes with default values and default issues that upload a projecy board containing issues to implement FAIR for research software.
 
 ## Documentation for users
 
@@ -7,32 +9,41 @@
 I recommend installing the tool inside a conda environment:
 
 ```bash
-git clone https://github.com/mwakok/dcc_tools.git
-cd dcc_tools
+git clone https://github.com/mwakok/ghprojects.git
+cd ghproject
 conda env create -f environment.yml
-conda activate dcc_tools
-pip install -e .
+conda activate ghproject
+pip install .
 ```
 
 ### Usage
 
-#### Create a GitHub project with issues
+The tool can be used both from the command line and from a Python interpretor, e.g. a Jupyter notebook. We take as an example the following use case in which we want to upload a project board with accompanying issues. Issues are generated from markdown files that need to contain a header with the issue title and associated labels (as a list of strings). 
 
-You can call the module to upload a new project to a GitHub reposotory from the terminal. To 
-
-```bash
-python -m  dcc_tools.github.upload_project -h
+```yml
+---
+title: Create FAIR software checklist
+labels: ["documentation", "feature"]
+---
 ```
 
-An example would be
+The issue body is then created from the following markdown text. Examples of issues can be found in the folder `/md_files` in the repository.
+
+You can call the module to upload a new project to a GitHub reposotory from the command line. Use to following command to view the help file:
 
 ```bash
-python -m dcc_tools.github.upload_project --repo "my_repository" --loglevel "INFO" --columns ["Backlog", "To do", "In progress", "Done"]
+python -m  ghproject.upload_project -h
 ```
 
-Using the GitHub API requires a Personal Access Token, which can be created via your GitHub settings. 
+To upload a project board to an existing repository from the command line, use:
 
-Example usage in a 
+```bash
+python -m ghproject.upload_project --repo "my_repository" --owner "username" --path "./md_files" --project "My project" --columns ["Backlog", "To do", "In progress", "Done"]
+```
+
+Using the GitHub API requires a Personal Access Token (PAT), which can be created via your [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). To prevent hardcoding of any access tokens, it's a best practice to keep your GitHub PAT as a local environment variable. By default, the package will inspect the environment variable `GITHUB_TOKEN` for the argument `--token`.
+
+The various functions can also be accessed directly from the GitHubAPI class. Example usage would be:
 
 ```python
 import os
@@ -50,13 +61,12 @@ repo.push_project(project_name)
 repo.push_issues()
 repo.add_issues_to_project(project_name)
 
-
 ```
 
 
 ## License
 
-Copyright (c) 2021, Maurits Kok
+Copyright (c) 2022, Maurits Kok
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

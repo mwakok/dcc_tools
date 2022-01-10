@@ -34,7 +34,6 @@ setup(
     ],
     test_suite="tests",
     packages=find_packages(exclude=["*tests*"]),
-    package_data={"ghproject": ["md_files/*"]},
     python_requires=">=3.7,<3.9",
     include_package_data=True,
     install_requires=["python-frontmatter", "requests>=2.24.0"],
@@ -47,6 +46,7 @@ setup(
             "pytest",
             "pytest-cov",
             "sphinx",
+            "sphinx-rtd-theme",
         ]
     },
 )
