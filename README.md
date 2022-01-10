@@ -9,7 +9,7 @@ The package `ghproject` is a tool for uploading project boards to GitHub filled 
 
 **Possible use cases:**
 * Create an onboarding project board for new team members
-* Create a project board for creating FAIR research software
+* Create a project board for developing FAIR research software
 
 
 Navigate to [API documentation](https://mwakok.github.io/ghproject/) for more detailed and structured information.
