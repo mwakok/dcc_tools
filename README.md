@@ -1,6 +1,18 @@
 # Tool for uploading creating project boards on GitHub
 
-`ghproject` is a tool for uploading project boards to GitHub filled with labelled issues. This has been created to aid project management for consulting in research software projects on GitHub. The package comes with default values and default issues that upload a projecy board containing issues to implement FAIR for research software.
+[![GitHub](https://img.shields.io/github/license/mwakok/ghproject)](https://github.com/mwakok/ghproject/blob/master/LICENSE)
+[![GitHub Open Issues](https://img.shields.io/github/issues/mwakok/ghproject.svg)](https://github.com/mwakok/ghprojectfindpeaks/issues)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Sphinx](https://img.shields.io/badge/Sphinx-Docs-Green)](https://mwakok.github.io/ghproject/)
+
+The package `ghproject` is a tool for uploading project boards to GitHub filled with labelled issues. This has been created to aid project management in research software projects on GitHub. 
+
+**Possible use cases:**
+* Create an onboarding project board for new team members
+* Create a project board for creating FAIR research software
+
+
+Navigate to [API documentation](https://mwakok.github.io/ghproject/) for more detailed and structured information.
 
 ## Documentation for users
 
@@ -12,7 +24,7 @@ I recommend installing the tool inside a conda environment:
 git clone https://github.com/mwakok/ghprojects.git
 cd ghproject
 conda env create -f environment.yml
-conda activate ghproject
+conda activate env_ghproject
 pip install .
 ```
 

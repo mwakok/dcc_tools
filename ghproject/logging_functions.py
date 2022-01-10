@@ -42,7 +42,14 @@ _formatter = logging.Formatter(
 
 
 def init_logger(logger_name="ghproject"):
-    """Initialize ghproject logger."""
+    """Initialize ghproject logger.
+
+    Parameters
+    ----------
+    logger_name : str
+        name of the logger, default is ghproject
+
+    """
     logger = logging.getLogger(logger_name)
     logger.setLevel(logging.WARNING)
     handler = logging.StreamHandler(sys.stdout)
@@ -54,6 +61,7 @@ def init_logger(logger_name="ghproject"):
 
 def set_logger_level(loglevel: str, logger_name="ghproject"):
     """Update logging level to given loglevel.
+
     Parameters
     ----------
     loglevels

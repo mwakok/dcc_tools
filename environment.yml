@@ -1,4 +1,4 @@
-name: ghproject
+name: env_ghproject
 channels:
   - conda-forge
   - defaults

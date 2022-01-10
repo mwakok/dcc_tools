@@ -7,7 +7,40 @@ logger = logging.getLogger("ghproject")
 
 
 class GitHubAPI:
-    """Create a project board with issues in a GitHub repository"""
+    """Create a project board with issues in a GitHub repository
+
+    Parameters
+    ----------
+    repo_name : str
+        Name of the repository
+    repo_owner : str
+        Name of the organization or GitHub user that owns the repository
+    github_token : str
+        GitHub Personal Access Token
+
+    Examples
+    --------
+    >>> import os
+    >>> from ghproject import GitHubAPI, init_logger
+    >>>
+    >>> # Initialize logger
+    >>> init_logger()
+    >>>
+    >>> # Setup arguments
+    >>> repo_name = "my_repository"
+    >>> repo_owner = "username" # Github user name or organization name
+    >>> token = os.environ["GITHUB_TOKEN"]
+    >>> path_issues = "./md_files"
+    >>> project_name = "My project"
+    >>>
+    >>> # Instantiate repo and call functions
+    >>> repo = GitHubAPI(repo_name, repo_owner, token)
+    >>> repo.load_markdown_files(path_issues)
+    >>> repo.push_project(project_name)
+    >>> repo.push_issues()
+    >>> repo.add_issues_to_project(project_name)
+
+    """
 
     def __init__(
         self,
@@ -15,16 +48,7 @@ class GitHubAPI:
         repo_owner: str,
         github_token: str,
     ):
-        """
-        Parameters
-        ----------
-        repo_name : str
-            Name of the repository
-        repo_owner : str
-            Name of the organization or GitHub user that owns the repository
-        github_token : str
-            GitHub Personal Access Token
-        """
+        """Initialize GitHubAPI parameters."""
         self.repo_name = repo_name
         self.repo_owner = repo_owner
         self.headers = {
