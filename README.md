@@ -61,9 +61,6 @@ The various functions can also be accessed directly from the GitHubAPI class. Ex
 import os
 from ghproject import GitHubAPI, init_logger
 
-# Initialize logger
-init_logger()
-
 # Setup arguments
 repo_name = "my_repository"
 repo_owner = "username" # Github user name or organization name
