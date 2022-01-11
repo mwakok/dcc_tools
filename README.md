@@ -59,7 +59,7 @@ The various functions can also be accessed directly from the GitHubAPI class. Ex
 
 ```python
 import os
-from ghproject import GitHubAPI, init_logger
+from ghproject import GitHubAPI
 
 # Setup arguments
 repo_name = "my_repository"
