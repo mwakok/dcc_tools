@@ -12,7 +12,7 @@ The package `ghproject` is a tool for uploading project boards to GitHub filled 
 * Create a project board for developing FAIR research software
 
 
-Navigate to [API documentation](https://mwakok.github.io/ghproject/) for more detailed and structured information.
+Navigate to [API documentation](https://mwakok.github.io/ghproject/ghproject.html) for more detailed and structured information.
 
 ## Documentation for users
 
