@@ -1,4 +1,4 @@
-# Tool for uploading creating project boards on GitHub
+# Tool for uploading project boards on GitHub
 
 [![GitHub](https://img.shields.io/github/license/mwakok/ghproject)](https://github.com/mwakok/ghproject/blob/master/LICENSE)
 [![GitHub Open Issues](https://img.shields.io/github/issues/mwakok/ghproject.svg)](https://github.com/mwakok/ghprojectfindpeaks/issues)
