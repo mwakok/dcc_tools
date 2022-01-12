@@ -1,7 +1,7 @@
 # Tool for uploading project boards on GitHub
 
 [![GitHub](https://img.shields.io/github/license/mwakok/ghproject)](https://github.com/mwakok/ghproject/blob/master/LICENSE)
-[![GitHub Open Issues](https://img.shields.io/github/issues/mwakok/ghproject.svg)](https://github.com/mwakok/ghprojectfindpeaks/issues)
+[![GitHub Open Issues](https://img.shields.io/github/issues/mwakok/ghproject.svg)](https://github.com/mwakok/ghproject/issues)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Sphinx](https://img.shields.io/badge/Sphinx-Docs-Green)](https://mwakok.github.io/ghproject/)
 
