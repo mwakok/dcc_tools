@@ -1,4 +1,9 @@
-"""ghproject logger.
+"""
+---
+Adapted from https://github.com/matchms/matchms/blob/master/matchms/logging_functions.py
+Licensed under Apache License, version 2.0
+Copyright (c) 2021, Netherlands eScience Center
+---
 
 ghproject functions and method report unexpected or undesired behavior as
 logging WARNING, and additional information as INFO.
