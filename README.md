@@ -21,7 +21,7 @@ Navigate to [API documentation](https://mwakok.github.io/ghproject/ghproject.htm
 I recommend installing the tool inside a conda environment:
 
 ```bash
-git clone https://github.com/mwakok/ghprojects.git
+git clone https://github.com/mwakok/ghproject.git
 cd ghproject
 conda env create -f environment.yml
 conda activate env_ghproject
