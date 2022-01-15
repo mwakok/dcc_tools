@@ -1,7 +1,6 @@
 import os
 from setuptools import setup, find_packages
 
-
 here = os.path.abspath(os.path.dirname("__file__"))
 
 version = {}
@@ -14,7 +13,7 @@ with open("README.md") as readme_file:
 setup(
     name="ghproject",
     version=version["__version__"],
-    description="Tool for Digital Competence Center Support",
+    description="Tool for uploading project boards to GitHub",
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/mwakok/ghproject",
