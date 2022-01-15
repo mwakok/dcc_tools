@@ -20,14 +20,10 @@ Navigate to [API documentation](https://mwakok.github.io/ghproject/ghproject.htm
 
 ### Installation
 
-I recommend installing the tool inside a conda environment:
+The tool can be installed with pip:
 
 ```bash
-git clone https://github.com/mwakok/ghproject.git
-cd ghproject
-conda env create -f environment.yml
-conda activate env_ghproject
-pip install .
+pip install ghproject
 ```
 
 Using `ghproject` requires a GitHub Personal Access Token (PAT), which can be created via your [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). To prevent hardcoding of any access tokens, it's a best practice to keep your GitHub PAT as a local environment variable. By default, the package will inspect the environment variable `GITHUB_TOKEN` for the argument `--token`.
@@ -85,6 +81,18 @@ repo.push_issues()
 repo.add_issues_to_project(project_name)
 ```
 
+## Documentation for developers
+
+### Installation
+I recommend installing the tool inside a conda environment:
+
+```bash
+git clone https://github.com/mwakok/ghproject.git
+cd ghproject
+conda env create -f environment.yml
+conda activate env_ghproject
+pip install -e .[dev]
+```
 
 ## License
 
