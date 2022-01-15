@@ -21,16 +21,16 @@ def create_parser():
         "--path", type=str, required=True, help="path to the folder with markdown files"
     )
     parser.add_argument(
+        "--owner",
+        type=str,
+        required=True,
+        help="GitHub username or organization name",
+    )
+    parser.add_argument(
         "--project",
         default="DCC Support",
         type=str,
-        help="name of the project board, default is 'DCC Support'",
-    )
-    parser.add_argument(
-        "--owner",
-        default=os.environ["GITHUB_USER"],
-        type=str,
-        help="GitHub username or organization name, default is environment variable GITHUB_USER",
+        help="name of the project board, default is DCC Support",
     )
     parser.add_argument(
         "--token",
@@ -40,8 +40,8 @@ def create_parser():
     )
     parser.add_argument(
         "--columns",
+        nargs="+",
         default=["To do", "In progress", "Done"],
-        type=list,
         help="list of column names in project board, default is ['To do', 'In progress', 'Done']",
     )
     parser.add_argument(
@@ -50,6 +50,7 @@ def create_parser():
         help="project board column to add issues to, default is first element in list columns",
     )
     parser.add_argument("--loglevel", default="WARNING", type=str, help="loglevels")
+
     args = parser.parse_args()
 
     return args
