@@ -145,7 +145,7 @@ class GitHubAPI:
             else:
                 logger.warning(f"Issue '{issue['title']}' already exists")
 
-    def add_issues_to_project(self, project_name: str, column_name: str):
+    def add_issues_to_project(self, project_name: str, column_name: str = None):
         """Add uploaded issues to project board
 
         Parameters

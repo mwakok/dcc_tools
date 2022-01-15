@@ -40,9 +40,10 @@ def create_parser():
     )
     parser.add_argument(
         "--columns",
+        type=str,
         nargs="+",
         default=["To do", "In progress", "Done"],
-        help="list of column names in project board, default is ['To do', 'In progress', 'Done']",
+        help="column names in project board, default is 'To do' 'In progress' 'Done' (provide without commas)",
     )
     parser.add_argument(
         "--issue_column",
