@@ -28,6 +28,16 @@ conda activate env_ghproject
 pip install .
 ```
 
+Using `ghproject` requires a GitHub Personal Access Token (PAT), which can be created via your [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). To prevent hardcoding of any access tokens, it's a best practice to keep your GitHub PAT as a local environment variable. By default, the package will inspect the environment variable `GITHUB_TOKEN` for the argument `--token`.
+
+To set up the Token called `GITHUB_TOKEN` for Windows, execute in a terminal:
+```bash
+setx GITHUB_TOKEN <token> 
+```
+
+You might need to restart your terminal/IDE for the changes to take effect.
+
+
 ### Usage
 
 The tool can be used both from the command line and from a Python interpretor, e.g. a Jupyter notebook. We take as an example the following use case in which we want to upload a project board with accompanying issues. Issues are generated from markdown files that need to contain a header with the issue title and associated labels (as a list of strings). 
@@ -47,13 +57,11 @@ You can call the module to upload a new project to a GitHub reposotory from the 
 python -m  ghproject.upload_project -h
 ```
 
-To upload a project board to an existing repository from the command line, use:
+For example, the following command will create the project board "My project" in the repository "my_repository" and add the issues generated from the markdown files in the relative folder "/md_files":
 
 ```bash
-python -m ghproject.upload_project --repo "my_repository" --owner "username" --path "./md_files" --project "My project" --columns ["Backlog", "To do", "In progress", "Done"]
+python -m ghproject.upload_project --repo "my_repository" --owner "username" --path "./md_files" --project "My project"
 ```
-
-Using the GitHub API requires a Personal Access Token (PAT), which can be created via your [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). To prevent hardcoding of any access tokens, it's a best practice to keep your GitHub PAT as a local environment variable. By default, the package will inspect the environment variable `GITHUB_TOKEN` for the argument `--token`.
 
 The various functions can also be accessed directly from the GitHubAPI class. Example usage would be:
 
