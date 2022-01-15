@@ -92,10 +92,7 @@
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ghproject</span> <span class="kn">import</span> <span class="n">GitHubAPI</span><span class="p">,</span> <span class="n">init_logger</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Initialize logger</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">init_logger</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ghproject</span> <span class="kn">import</span> <span class="n">GitHubAPI</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Setup arguments</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repo_name</span> <span class="o">=</span> <span class="s2">&quot;my_repository&quot;</span>
@@ -120,7 +117,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>project_name</strong> (<em>str</em>) – name of the project board to add the issues to</p></li>
-<li><p><strong>column_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the column to add the issues to, by default “To do”</p></li>
+<li><p><strong>column_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the column to add the issues to, defaults to first column</p></li>
 </ul>
 </dd>
 </dl>
