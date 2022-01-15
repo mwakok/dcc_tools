@@ -29,6 +29,8 @@ def post_request(url: str, data: dict, headers: dict):
     if r.status_code in [201, 202]:
         logger.debug("Successfully executed the POST request")
         return json.loads(r.content)
+    elif r.status_code == 401:
+        logger.warning("Status: 401 Unauthorized")
     else:
         logger.warning(json.loads(r.content)["errors"][0]["message"])
 
@@ -53,8 +55,11 @@ def get_request(url: str, headers: dict):
     if r.status_code == 200:
         logger.debug("Successfully executed the GET request")
         return json.loads(r.content)
+    elif r.status_code == 401:
+        logger.warning("Status: 401 Unauthorized")
+        return None
     else:
-        logger.warning(json.loads(r.content)["errors"][0]["message"])
+        logger.error(json.loads(r.content)["errors"][0]["message"])
         return None
 
 
@@ -71,5 +76,7 @@ def verify_authentication(url, headers):
     r = request("GET", url=url, headers=headers)
     if r.status_code == 200:
         logger.info(f"Authentication successful to {url}")
+    elif r.status_code == 401:
+        logger.warning("Status: 401 Unauthorized")
     else:
         logger.error(f"Status {r.status_code}, {json.loads(r.content)}")
