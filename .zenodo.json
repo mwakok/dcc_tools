@@ -1,0 +1,18 @@
+{
+    "creators": [
+        {
+            "affiliation": "Technische Universiteit Delft, Digital Competence Center",
+            "name": "Kok, Maurits",
+            "orcid": "https://orcid.org/0000-0002-0564-2614"
+        }
+    ],
+    "description": "Tool for uploading project boards to GitHub.",
+    "keywords": [
+        "automation",
+        "GitHub"
+    ],
+    "license": {
+        "id": "Apache-2.0"
+    },
+    "title": "ghproject"
+}
