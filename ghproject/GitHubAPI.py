@@ -21,10 +21,7 @@ class GitHubAPI:
     Examples
     --------
     >>> import os
-    >>> from ghproject import GitHubAPI, init_logger
-    >>>
-    >>> # Initialize logger
-    >>> init_logger()
+    >>> from ghproject import GitHubAPI
     >>>
     >>> # Setup arguments
     >>> repo_name = "my_repository"
@@ -156,12 +153,12 @@ class GitHubAPI:
         project_name : str
             name of the project board to add the issues to
         column_name : str, optional
-            name of the column to add the issues to, by default "To do"
+            name of the column to add the issues to, defaults to first column
         """
         # Get column ids
         columns = self.get_columns(project_name)
-        if not column_name:
-            column_name = "To do"
+        if not column_name and columns:
+            column_name = list(columns.keys())[0]
 
         try:
             id_column = columns[column_name]
