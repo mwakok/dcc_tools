@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2022-01-16
+
 ### Changed
 
-- Fix attribution error in arg_parser.py (#8)
+- Fix attribution error in arg_parser.py [#8](https://github.com/mwakok/ghproject/issues/8)
 
 ## [0.0.1] - 2022-01-15
 
@@ -22,5 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Jupyter notebook with example
     - Sphinx documentation with generated API reference
 
-[Unreleased]: https://github.com/mwakok/ghproject/compare/0.0.1...HEAD
+[Unreleased]: https://github.com/mwakok/ghproject/compare/0.0.2...HEAD
+[0.0.2]: https://github.com/mwakok/ghproject/releases/tag/0.0.2
 [0.0.1]: https://github.com/mwakok/ghproject/releases/tag/0.0.1
