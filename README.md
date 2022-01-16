@@ -4,7 +4,7 @@
 [![GitHub Open Issues](https://img.shields.io/github/issues/mwakok/ghproject.svg)](https://github.com/mwakok/ghproject/issues)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Sphinx](https://img.shields.io/badge/Sphinx-Docs-Green)](https://mwakok.github.io/ghproject/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5854902.svg)](https://doi.org/10.5281/zenodo.5854901)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5854901.svg)](https://doi.org/10.5281/zenodo.5854901)
 
 
 The package `ghproject` is a tool for uploading project boards to GitHub filled with labelled issues. This has been created to aid project management in research software projects on GitHub. 
